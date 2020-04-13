@@ -32,7 +32,7 @@
 
 <script>
     <php>
-    $params = I('get.');
+    $params = input('get.');
     unset($params['p']);
     $params = http_build_query($params);
     </php>

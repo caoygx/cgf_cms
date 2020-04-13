@@ -175,7 +175,7 @@
             $currentUrl = "/admin/".CONTROLLER_NAME;
             if(strtolower(ACTION_NAME) != 'index') $currentUrl .= '/'.ACTION_NAME;
 
-            $menu = config('menu');
+            $menu = config('admin.menu');
             foreach($menu as $k=>$v){
                 foreach($v['children'] as $k2=>$v2){
                     if(strtolower($v2['url']) == strtolower($currentUrl)){
@@ -198,7 +198,7 @@
                     <volist id="vom" name="menu">
                         <li class="nav-item has-treeview <php>if($key == $currentMenuModuleKey) echo 'menu-open'</php> ">
                             <a href="#" class="nav-link <php>if($key == $currentMenuModuleKey) echo 'active'</php>">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas {$vom.icon|default='fa-tachometer-alt'}"></i>
                                 <p>
                                     {$vom.title}
                                     <i class="right fas fa-angle-left"></i>
@@ -208,7 +208,7 @@
                                 <volist id="sub" name="vom['children']">
                                     <li class="nav-item">
                                         <a href="{$sub.url}" class="nav-link <?php if(strtolower($sub['url']) == strtolower($currentUrl)){echo 'active';} ?>">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="far {$vom.icon|default='fa-circle'} nav-icon"></i>
                                             <p>{$sub.title}</p>
                                         </a>
                                     </li>
