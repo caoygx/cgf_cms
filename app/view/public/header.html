@@ -172,8 +172,9 @@
 
             <?php
 
-            $currentUrl = "/admin/".CONTROLLER_NAME;
-            if(strtolower(ACTION_NAME) != 'index') $currentUrl .= '/'.ACTION_NAME;
+            $currentUrl = "/admin/".$controllerName;
+            if($actionName == '') $actionName="index";
+            $currentUrl .= '/'.$actionName;
 
             $menu = config('admin.menu');
             foreach($menu as $k=>$v){
@@ -185,6 +186,8 @@
                 }
             }
 
+            $currentMenuConfig = ['controller'=>$controllerName,'action'=>$actionName];
+            //var_dump(generate_admin_url($currentMenuConfig) , strtolower($currentUrl));
             ?>
 
 
@@ -207,7 +210,7 @@
                             <ul class="nav nav-treeview">
                                 <volist id="sub" name="vom['children']">
                                     <li class="nav-item">
-                                        <a href="{$sub.url}" class="nav-link <?php if(strtolower($sub['url']) == strtolower($currentUrl)){echo 'active';} ?>">
+                                        <a href="{$sub|generate_admin_url}" class="nav-link <?php if(strtolower(generate_admin_url($sub)) == strtolower($currentUrl)){echo 'active';} ?>">
                                             <i class="far {$vom.icon|default='fa-circle'} nav-icon"></i>
                                             <p>{$sub.title}</p>
                                         </a>

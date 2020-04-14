@@ -185,6 +185,9 @@ class {%className%} extends Common
         $this->actionName = Request::action();
         //var_dump($this->moduleName,$this->controllerName,$this->actionName);exit;
 
+        $this->assign('controllerName',$this->controllerName);
+        $this->assign('actionName',$this->actionName);
+
         if($this->autoInstantiateModel) {
             $this->createModelAutomatically($this->controllerName);
         }

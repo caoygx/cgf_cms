@@ -1,12 +1,11 @@
 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
 
-
-<div class="row-fluid sortable">
-    <div class="box span12">
-        <div data-original-title="" class="box-header well"><!-- <i class="icon-user"></i> <a href="add" class=""></a>{$pageTitle}--></div>
-        <div class="box-content">
-            <form method='get' action="{:url('index')}"  class="form-inline">
-                  <div class="form-group" >
+                <form method='get' action="__SELF__" class="form-inline">
+                      <div class="form-group" >
     <label for="id"> id</label>
     
        <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
@@ -126,24 +125,39 @@
    
 
 
-		      <button type="submit" class="btn btn-primary">搜索</button>
-		    </form>
-            <br />
-            <php>  $query = strstr($_SERVER["REQUEST_URI"],'?');    </php>
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <php> $query = strstr($_SERVER["REQUEST_URI"],'?');</php>
 
-            <php>if(0==1){</php>
-            <a href="{:url('add')}" type="button" class="btn btn-warning">添加</a>
-            <php>}</php>
-
-
-            <php>if(0==1){</php>
-            <a href="{:url('exportExcel')}" type="button" class="btn btn-warning">导出</a>
-            <php>}</php>
+                <div class="row">
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/add" class="btn btn-block btn-info btn-sm ">添加</a>
+                    </div>
+                    <php>}</php>
 
 
-           <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
-            <html:list id="checkList" name="vo" style="table table-striped table-bordered bootstrap-datatable datatable" checkbox="true" action="true"  datasource="list" show="id:id::sort,user_id:user_id::sort,realname:realname::sort,mobile:mobile::sort,province:province::sort,city:city::sort,area:area::sort,address:address::sort,isdefault:isdefault::sort,zipcode:zipcode::sort,deleted:deleted::sort,street:street::sort,datavalue:datavalue::sort,streetdatavalue:streetdatavalue::sort,lng:lng::sort,lat:lat::sort,status:status::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
-            <div>
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
+                                             class="btn btn-block btn-info btn-sm ">导出</a></div>
+                    <php>}</php>
+                </div>
+
+
+            </div>
+
+            <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <div class="card-body">
+                <html:list id="checkList" name="vo"
+                           style="table table-striped table-bordered bootstrap-datatable datatable"
+                           checkbox="true" action="true" datasource="list" show="id:id::sort,user_id:user_id::sort,realname:realname::sort,mobile:mobile::sort,province:province::sort,city:city::sort,area:area::sort,address:address::sort,isdefault:isdefault::sort,zipcode:zipcode::sort,deleted:deleted::sort,street:street::sort,datavalue:datavalue::sort,streetdatavalue:streetdatavalue::sort,lng:lng::sort,lat:lat::sort,status:status::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
+
+
+
+            </div>
+
+            <div class="card-body">
+            <div class="row">
                 <php>if(0==1){</php>
                 <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
                 <php>}</php>
@@ -154,12 +168,15 @@
             </div>
             <div class="container text-center">
                 {$page}
-                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page" name="txt_page" >页 <input id="btn_jump" type="button" value="跳转"></div>
-                </div>
- 
-        </div>
-    </div>
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page"
+                                                        name="txt_page">页
+                    <input id="btn_jump" type="button" value="跳转"></div>
+            </div>
+            </div>
 
+        </div>
+
+    </div>
 </div>
 
 <script src="__PUBLIC__/common/UserAddress.js"></script>
@@ -185,5 +202,9 @@
 
             }
         });
+
+
+
+
 
 </script>
