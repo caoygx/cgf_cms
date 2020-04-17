@@ -215,8 +215,10 @@ class {%className%} extends Common
             $cgfConf['tableName']          = $tableName;//表名
             $cgfConf['controllerName']     = $this->controllerName;//控制器名
             $cgfConf['appRootPath']        = $appBasePath;//框架应用程序根目录
-            $cgfConf['parentTemplatePath'] = $appBasePath . '/view/public/';//cgf生成模板使用的父模板,cgf会根据这里的模板来生成应用模板
-            $cgfConf['templateSavePath']   = $appBasePath . "/view/{$tableName}";//cgf生成的模板保存路径
+
+            $viewDir = $this->app->getAppPath()."view/".$this->request->module."/";
+            $cgfConf['parentTemplatePath'] = $viewDir . 'public/';//cgf生成模板使用的父模板,cgf会根据这里的模板来生成应用模板
+            $cgfConf['templateSavePath']   = $viewDir . "{$tableName}";//cgf生成的模板保存路径
             $cgfConf['availableModule']    = ['common', 'admin','index'];//可用模块
             $cgfConf['autoHiddenPrimaryKey']    = false;//是否将主键表单类型设为hidden
 
@@ -1128,8 +1130,12 @@ class {%className%} extends Common
             $jsonData['data'] = $data;
             return jsonp($jsonData);
         }elseif($default_return_format=='wap'){
+
             return view('', $data);
         }else{
+            $viewDir = $this->app->getAppPath()."view/".$this->request->module."/";
+            View::config(['view_path' => $viewDir]);
+            //var_dump();
             return view('', $data);
         }
     }

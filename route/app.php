@@ -6,10 +6,7 @@ use think\facade\Env;
 
 
 Route::group('', function () {
-
-
-
-    Route::rule('ita/notify', 'Home/notify');
+    Route::rule('/', 'home/index');
 })->middleware([\app\middleware\Auth::class],'home');
 
 Route::group('u', function () {
@@ -47,4 +44,4 @@ Route::group('admin', function () {
 
 
 
-});//->middleware([\app\middleware\Auth::class],'admin');
+})->middleware([\app\middleware\Auth::class],'admin');

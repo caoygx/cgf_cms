@@ -22,12 +22,17 @@ class Auth
      * @param $c
      * @return mixed
      */
-    public function handle($request, \Closure $next,$c)
+    public function handle($request, \Closure $next,$module)
     {
-        $pathinfo = Request::pathinfo();
-        $pathinfo = explode('/',$pathinfo);
-        $module = $pathinfo[0];
+        //获取模块名
+        if(empty($module)){ //没传模块名，自动通过url获取
+            $pathinfo = Request::pathinfo();
+            $pathinfo = explode('/',$pathinfo);
+            $module = $pathinfo[0];
+
+        }
         $request->module = $module;
+
         $controller = Request::controller();
         $action = Request::action();
         if(strtolower($module) == 'u'){ //做验证
@@ -48,7 +53,7 @@ class Auth
             if(empty($u)) return json(['code' => 0, 'msg'  => '未登录' ]);
             $rUser = Db::name('OutletUser')->find($u['token']);
             if(empty($rUser)) return json(['code' => 0, 'msg'  => '用户不存在' ]);*/
-            $request->admin_id = I('token');
+            $request->admin_id = input('token');
             //$request->store_id = $rUser['current_outlet_id'];
             //$request->user = $rUser;
             Config::set(['default_return_format' => 'html'], 'app');

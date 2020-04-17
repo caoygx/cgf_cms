@@ -8,7 +8,7 @@ use think\Model;
 /**
  * @mixin think\Model
  */
-class Goods extends Model
+class Home extends Model
 {
     //
 }
