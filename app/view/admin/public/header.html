@@ -14,6 +14,55 @@
     <link href="__PUBLIC__/adminlet/dist/css/google.fonts.css" rel="stylesheet">
     <style type="text/css">.page a,.page a:hover,.page .current{display:inline-block;margin-right:2px;padding:0 10px;height:25px;line-height:25px;vertical-align:middle}.page a{color:#404548;border:1px solid #d7dbdc;background-color:#fff}.page a:hover,.page .current{text-decoration:none;color:#FFF;background-color:#397ab9;vertical-align:middle}.page .next,.page .prev{font-family:"宋体"}.no-skin .nav-list>li .submenu>li>a.active{color:#4b88b7;background-color:#f1f5f9}</style>
     <script src="__PUBLIC__/adminlet/plugins/jquery/jquery.min.js"></script>
+
+
+    <!--layui-->
+    <link rel="stylesheet" href="__PUBLIC__/Plugin/layui-v2.3.0/css/layui.css" />
+    <script src="__PUBLIC__/Plugin/layui-v2.3.0/layui.all.js"></script>
+
+
+
+    <!--自定义新加的-->
+    <script>
+        var CONTROLLER="/admin/{$controllerName}";
+        var URL_WWW = '__W__';
+
+        /*   $(".nav-list li a").each(function(index, element) {
+         if($(element).attr("href") == CONTROLLER + "/index.html"){
+         //$(element).parent(this).addClass("active");
+         }
+         });*/
+    </script>
+    <script src="__PUBLIC__/common.js"></script>
+    <script src="__PUBLIC__/Plugin/kindeditor-4.1.7/kindeditor-all-min.js"></script>
+
+
+    <!--日期-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC3/css/bootstrap-datepicker.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC3/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0-RC3/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
+    <!--日期 支持时间-->
+    <!--  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/zh-cn.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+     <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>-->
+
+    <link href="__PUBLIC__/validform/validform.css" rel="stylesheet">
+    <script src="//apps.bdimg.com/libs/validform/5.3.2/validform.min.js"></script>
+
+
+    <script>
+        var laydate;
+        layui.use('laydate', function () {
+            laydate = layui.laydate;
+
+        });
+    </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -25,10 +74,10 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="__PUBLIC__/adminlet/index3.html" class="nav-link">首页</a>
+                <a href="__PUBLIC__/adminlet/index3.html" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">关于我们</a>
+                <a href="#" class="nav-link"></a>
             </li>
         </ul>
 

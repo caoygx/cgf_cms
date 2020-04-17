@@ -22,8 +22,14 @@ Route::group('u', function () {
 
 
 Route::group('admin', function () {
-    Route::rule('/userAddress/index', 'userAddress/index');
+
     Route::rule('/goods/index', 'goods/index');
+    Route::rule('/goods/add', 'goods/add');
+    Route::rule('/goods/edit', 'goods/edit');
+    Route::rule('/goods/save', 'goods/save');
+    Route::rule('/goods/save', 'goods/save');
+
+    Route::rule('/order/index', 'order/index');
     Route::rule('/auth/login/userInfo', 'login/userInfo');
     Route::rule('/auth/login/index', 'login/index');
     Route::rule('/auth/login/out', 'login/out');

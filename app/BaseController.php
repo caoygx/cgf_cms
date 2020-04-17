@@ -14,6 +14,7 @@ use think\facade\Console;
 use think\exception\ValidateException;
 use think\Model;
 use think\Validate;
+use liliuwei\think\Jump;
 
 
 /**
@@ -21,6 +22,8 @@ use think\Validate;
  */
 abstract class BaseController
 {
+
+    use \liliuwei\think\Jump;
 
     public $u_id;
     public $store_id;
@@ -246,8 +249,36 @@ class {%className%} extends Common
         return $this->toview();
     }
 
+
+    function edit()
+    {
+
+        //自动获取添加模板
+        $tpl = $this->generateAddTpl(true);
+
+        $id          = input($this->m->getPk());
+        $where       = [];
+        $where['id'] = $id;
+        if (MODULE_NAME == 'User') $where['user_id'] = $this->user_id;
+        $vo = $this->m->where($where)->find();
+        if (method_exists($this, '_replacePublic')) {
+            $this->_replacePublic($vo);
+        }
+        $this->vo = $vo;
+        $this->assign('action', 'edit');
+
+        $this->pageTitle = $this->getControllerTitle(CONTROLLER_NAME) . "编辑";
+        $this->cgf       = "cgf";
+
+        $this->toview("", "add");
+    }
+
+
     function save()
     {
+
+
+
         $data = input();
         if($this->uid){
             $data['uid'] = $this->uid;
@@ -291,7 +322,10 @@ class {%className%} extends Common
 
         $id = $this->m->id;
         if(!empty($id)) $this->assign('id',$id);
-        return $this->toview();
+
+        $this->success();
+        //return $this->success();
+        //return $this->toview();
 
 
 
@@ -330,7 +364,7 @@ class {%className%} extends Common
             $ret = [];
             //$this->assign ( 'jumpUrl', cookie( '_currentUrl_' ) );
 
-            if (I('multiple')) { //多图，需要关联图片到对应的主题,
+            if (input('multiple')) { //多图，需要关联图片到对应的主题,
                 //注意，不支持一个主题里有两个以上字段都是多图上传。此情况需要在图片表里增加标识，属于哪个字段，
                 //或在主题字段里存储用逗号分隔的图片id,如:1,2,3
 
@@ -379,7 +413,7 @@ class {%className%} extends Common
     }
 
     public function show(){
-        $id = I('id');
+        $id = input('id');
         $vo = $this->m->find($id);
         if(empty($vo)) return $this->error('数据不存在');
         if (method_exists ( $this, '_show' )) {
@@ -391,7 +425,7 @@ class {%className%} extends Common
 
 
     function getIds(){
-        $ids = I('id');
+        $ids = input('id');
         return explode(',',$ids);
     }
 
@@ -433,7 +467,7 @@ class {%className%} extends Common
 
     public function delete() {
         $pk = $this->m->getPk ();
-        $id = I($pk);
+        $id = input($pk);
         $id = (string)$id;
         if (empty ( $id ))  return $this->error ( '非法操作' );
         $condition = array ($pk =>  explode ( ',', $id ) ,"store_id"=>$this->store_id );
@@ -450,7 +484,7 @@ class {%className%} extends Common
         if(empty($rDelete)) return $this->error('删除失败');
         return $this->toview();
 
-        /*if (!empty(I('callback')) || IS_AJAX){
+        /*if (!empty(input('callback')) || IS_AJAX){
             $method_name = '_after_' . ACTION_NAME;
             if(method_exists($this,$method_name)){
                 $this->$method_name($r);
@@ -460,7 +494,7 @@ class {%className%} extends Common
 
     public function logicalDelete() {
         $pk = $this->m->getPk ();
-        $id = I($pk);
+        $id = input($pk);
         if (empty ( $id ))  return $this->error ( '非法操作' );
 
         $condition = array ($pk => explode ( ',', $id )  );
@@ -489,7 +523,7 @@ class {%className%} extends Common
 
         $this->pageTitle = $this->getControllerTitle(CONTROLLER_NAME) . "添加";
         $this->cgf       = "cgf";*/
-        return view();
+        return $this->toview();
     }
 
 
@@ -501,7 +535,7 @@ class {%className%} extends Common
         //所以要此代码从construct 移动到此处
         if(IS_AJAX){
             C('ret_format','json');
-        }elseif(!empty(I('callback'))){
+        }elseif(!empty(input('callback'))){
             C('ret_format','jsonp');
         }
 
@@ -558,9 +592,9 @@ class {%className%} extends Common
 
 
         /*//url带openid 自动写cookie,session等登录标识
-        $open_id = I('open_id');
+        $open_id = input('open_id');
         if($open_id){
-            $r =  M('User')->where(["open_id" => $open_id,"type" => I('type')])->find();
+            $r =  M('User')->where(["open_id" => $open_id,"type" => input('type')])->find();
             if(!empty($r)){
                 $r['uid'] = $r['id'];
                 $this->tempStorageOpenidUser = $r;
@@ -592,7 +626,7 @@ class {%className%} extends Common
     }
 
     function getPlatform(){
-        $platform = I('server.platform');
+        $platform = input('server.platform');
         if(empty($platform)){
             if(IS_MOBILE){
                 if(is_weixin()){
@@ -665,10 +699,10 @@ class {%className%} extends Common
             if(empty($_SERVER[$v])) continue;
             $header[$v] = $_SERVER[$v];
         }
-        /*$this->version = I('server.HTTP_VERSION');
-        $this->device_id = I('device_id') ?:I('server.HTTP_DEVICE_ID');
-        $this->platform = I('server.HTTP_PLATFORM');
-        $user_id = I('uid') ?: I('server.HTTP_USER_ID');
+        /*$this->version = input('server.HTTP_VERSION');
+        $this->device_id = input('device_id') ?:input('server.HTTP_DEVICE_ID');
+        $this->platform = input('server.HTTP_PLATFORM');
+        $user_id = input('uid') ?: input('server.HTTP_USER_ID');
         $detail['server'] = $_SERVER;*/
         //$detail['header'] = $header;
         //$data['detail'] = json_encode($detail);
@@ -686,7 +720,7 @@ class {%className%} extends Common
 
         $data['detail'] = $request;
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $data['platform'] = I('server.HTTP_PLATFORM');
+        $data['platform'] = input('server.HTTP_PLATFORM');
         $data['uid'] = cookie('uid');//cookie可能取出null,要求字段必须可为null
         $data['create_time'] = date("Y-m-d H:i:s");
         $data['method'] = $_SERVER['REQUEST_METHOD'];
@@ -1172,7 +1206,6 @@ class {%className%} extends Common
         }
         return ['error function'];
     }
-
 
     //用户信息
     function userinfo(){

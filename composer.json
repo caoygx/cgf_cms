@@ -25,7 +25,8 @@
         "topthink/think-orm": "^2.0",
         "rrbrr/cgf": "^1.0",
         "topthink/think-view": "^1.0",
-        "jaeger/querylist": "^4.2"
+        "jaeger/querylist": "^4.2",
+        "liliuwei/thinkphp-jump": "^1.5"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

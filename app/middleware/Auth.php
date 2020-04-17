@@ -33,6 +33,7 @@ class Auth
         }
         $request->module = $module;
 
+
         $controller = Request::controller();
         $action = Request::action();
         if(strtolower($module) == 'u'){ //做验证

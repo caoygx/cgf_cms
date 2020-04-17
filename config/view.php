@@ -28,6 +28,7 @@ return [
     'layout_name'   =>  'layout',
     'tpl_replace_string'  =>  [
         '__PUBLIC__'=>'/static/',
+        '__CONTROLLER__' => getControllerUrl(),
 
     ],
     'default_filter'     => '',

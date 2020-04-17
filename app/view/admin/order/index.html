@@ -1,0 +1,168 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <form method='get' action="__SELF__" class="form-inline">
+                      <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="id" style="margin-right:5px;"> id</label>
+    
+       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="openid" style="margin-right:5px;"> openid</label>
+    
+       <input  class="form-control" name="openid" type="text" id="openid" size="30" value="{$vo[openid] ? $vo[openid] : $_GET[openid]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="goods_id" style="margin-right:5px;"> goods_id</label>
+    
+       <input  class="form-control" name="goods_id" type="text" id="goods_id" size="10" value="{$vo[goods_id] ? $vo[goods_id] : $_GET[goods_id]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="goods_name" style="margin-right:5px;"> goods_name</label>
+    
+       <input  class="form-control" name="goods_name" type="text" id="goods_name" size="30" value="{$vo[goods_name] ? $vo[goods_name] : $_GET[goods_name]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="ch" style="margin-right:5px;"> ch</label>
+    
+       <input  class="form-control" name="ch" type="text" id="ch" size="30" value="{$vo[ch] ? $vo[ch] : $_GET[ch]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="status" style="margin-right:5px;"> 订单状态</label>
+    
+       <input  class="form-control" name="status" type="text" id="status" size="10" value="{$vo[status] ? $vo[status] : $_GET[status]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="user_type" style="margin-right:5px;"> user_type</label>
+    
+       <input  class="form-control" name="user_type" type="text" id="user_type" size="10" value="{$vo[user_type] ? $vo[user_type] : $_GET[user_type]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="create_t" style="margin-right:5px;"> create_t</label>
+    
+       <input  class="form-control" name="create_t" type="text" id="create_t" size="10" value="{$vo[create_t] ? $vo[create_t] : $_GET[create_t]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="modify_t" style="margin-right:5px;"> modify_t</label>
+    
+       <input  class="form-control" name="modify_t" type="text" id="modify_t" size="10" value="{$vo[modify_t] ? $vo[modify_t] : $_GET[modify_t]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="order_id" style="margin-right:5px;"> order_id</label>
+    
+       <input  class="form-control" name="order_id" type="text" id="order_id" size="30" value="{$vo[order_id] ? $vo[order_id] : $_GET[order_id]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="user_coupon_id" style="margin-right:5px;"> 用户券id</label>
+    
+       <input  class="form-control" name="user_coupon_id" type="text" id="user_coupon_id" size="10" value="{$vo[user_coupon_id] ? $vo[user_coupon_id] : $_GET[user_coupon_id]}" />
+       </div>
+   
+
+
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <php> $query = strstr($_SERVER["REQUEST_URI"],'?');</php>
+
+                <div class="row">
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/add" class="btn btn-block btn-info btn-sm ">添加</a>
+                    </div>
+                    <php>}</php>
+
+
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
+                                             class="btn btn-block btn-info btn-sm ">导出</a></div>
+                    <php>}</php>
+                </div>
+
+
+            </div>
+
+            <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <div class="card-body">
+                <html:list id="checkList" name="vo"
+                           style="table table-striped table-bordered bootstrap-datatable datatable"
+                           checkbox="true" action="true" datasource="list" show="id:id::sort,openid:openid::sort,goods_id:goods_id::sort,goods_name:goods_name::sort,ch:ch::sort,status_text:订单状态,user_type:user_type::sort,create_t:create_t::sort,modify_t:modify_t::sort,order_id:order_id::sort,user_coupon_id:用户券id::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
+
+
+
+            </div>
+
+            <div class="card-body">
+            <div class="row">
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
+                <php>}</php>
+
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="foreverdel();" class="btn btn-danger"> 批量删除</a>
+                <php>}</php>
+            </div>
+            <div class="container text-center">
+                {$page}
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page"
+                                                        name="txt_page">页
+                    <input id="btn_jump" type="button" value="跳转"></div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="__PUBLIC__/common/Order.js"></script>
+
+<script>
+    <php>
+        $params = input('get.');
+        unset($params['p']);
+        $params = http_build_query($params);
+    </php>
+
+        $(function () {
+            console.log(URL);
+
+            $('#btn_jump').click(function () {
+                goPage();
+            });
+            function goPage() {
+                var params = '{$params}';
+                var url = CONTROLLER+"/index?"+params;
+                url += "&p="+$('#txt_page').val();
+                window.location.href = url;
+
+            }
+        });
+
+
+
+
+
+</script>
