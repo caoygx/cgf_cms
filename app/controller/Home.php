@@ -8,7 +8,12 @@ use QL\QueryList;
 class Home extends BaseController
 {
     public $autoInstantiateModel=false;
-    public function index()
+
+    public function index(){
+        return $this->toview();
+    }
+
+    public function youku()
     {
         $args = [];
         $opts = [

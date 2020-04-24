@@ -1,0 +1,133 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <form method='get' action="__SELF__" class="form-inline">
+                      <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="status" style="margin-right:5px;"> 状态</label>
+    
+       <html:select  first="请选择" options='opt_status' selected='status_selected' name="status" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="sort" style="margin-right:5px;"> 商品排序</label>
+    
+       <input  class="form-control" name="sort" type="text" id="sort" size="10" value="{$vo[sort] ? $vo[sort] : $_GET[sort]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="user_id" style="margin-right:5px;"> 用户id</label>
+    
+       <input  class="form-control" name="user_id" type="text" id="user_id" size="10" value="{$vo[user_id] ? $vo[user_id] : $_GET[user_id]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="weight" style="margin-right:5px;"> 重量</label>
+    
+       <input  class="form-control" name="weight" type="text" id="weight" size="10" value="{$vo[weight] ? $vo[weight] : $_GET[weight]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="type" style="margin-right:5px;"> 类型</label>
+    
+       <html:select  first="请选择" options='opt_type' selected='type_selected' name="type" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="category_id" style="margin-right:5px;"> 商品分类</label>
+    
+       <input  class="form-control" name="category_id" type="text" id="category_id" size="10" value="{$vo[category_id] ? $vo[category_id] : $_GET[category_id]}" />
+       </div>
+   
+
+
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <php> $query = strstr($_SERVER["REQUEST_URI"],'?');</php>
+
+                <div class="row">
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/add" class="btn btn-block btn-info btn-sm ">添加</a>
+                    </div>
+                    <php>}</php>
+
+
+                    <php>if(1==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
+                                             class="btn btn-block btn-info btn-sm ">导出</a></div>
+                    <php>}</php>
+                </div>
+
+
+            </div>
+
+            <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <div class="card-body">
+                <html:list id="checkList" name="vo"
+                           style="table table-bordered table-hover dataTable dtr-inline"
+                           checkbox="true" action="true" datasource="list" show="thumb:缩略图::sort,status_text:状态,sort:商品排序::sort,user_id:用户id::sort,weight:重量::sort,type_text:类型,category_id:商品分类::sort,modify_t:修改时间::sort" actionlist="edit:编辑:id,goods_del:删除:id"/>
+
+
+
+            </div>
+
+            <div class="card-body">
+            <div class="row">
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
+                <php>}</php>
+
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="foreverdel();" class="btn btn-danger"> 批量删除</a>
+                <php>}</php>
+            </div>
+            <div class="container text-center">
+                {$page}
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page"
+                                                        name="txt_page">页
+                    <input id="btn_jump" type="button" value="跳转"></div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="__PUBLIC__/common/Goods.js"></script>
+
+<script>
+    <php>
+        $params = input('get.');
+        unset($params['p']);
+        $params = http_build_query($params);
+    </php>
+
+        $(function () {
+            console.log(URL);
+
+            $('#btn_jump').click(function () {
+                goPage();
+            });
+            function goPage() {
+                var params = '{$params}';
+                var url = CONTROLLER+"/index?"+params;
+                url += "&p="+$('#txt_page').val();
+                window.location.href = url;
+
+            }
+        });
+
+
+
+
+
+</script>

@@ -443,8 +443,9 @@ class Html extends TagLib
         //显示开始
         $parseStr = "<!-- Think 系统列表组件开始 -->\n";
         $parseStr .= '<table id="' . $id . '" class="' . $style . '" cellpadding=0 cellspacing=0 >';
-        $parseStr .= '<tr><td height="5" colspan="' . $colNum . '" class="topTd" ></td></tr>';
-        $parseStr .= '<tr class="" >';
+        $parseStr .= '<thead>';
+        //$parseStr .= '<tr><td height="5" colspan="' . $colNum . '" class="topTd" ></td></tr>';
+        $parseStr .= '<tr role="row" >';
         //列表需要显示的字段
         $fields = array();
         foreach ($show as $val) {
@@ -464,12 +465,12 @@ class Html extends TagLib
             if (isset($showname[1])) {
                 $parseStr .= '<th width="' . $showname[1] . '">';
             } else {
-                $parseStr .= '<th>';
+                $parseStr .= '<th class="sorting">';
             }
             $showname[2] = isset($showname[2]) ? $showname[2] : $showname[0];
             if('sort' == $field[3]){
-            //if ($sort) {
-                $parseStr .= '<a href="javascript:sortBy(\'' . $property[0] . '\',\'{$sort}\',\'' . ACTION_NAME . '\')" title="按照' . $showname[2] . '{$sortType} ">' . $showname[0] . '<eq name="order" value="' . $property[0] . '" > <span class="glyphicon {$sortImg}" ></span> <else/> <span class="glyphicon glyphicon-sort" ></span> </eq></a></th>';
+                //$parseStr .= '<a  href="javascript:sortBy(\'' . $property[0] . '\',\'{$sort}\',\'' . ACTION_NAME . '\')" title="按照' . $showname[2] . '{$sortType} ">' . $showname[0] . '<eq name="order" value="' . $property[0] . '" > <span class="glyphicon {$sortImg}" ></span> <else/> <span class="glyphicon glyphicon-sort" ></span> </eq></a></th>';
+                $parseStr .= $showname[0] . '</th>';
             } else {
                 $parseStr .= $showname[0] . '</th>';
             }
@@ -481,6 +482,7 @@ class Html extends TagLib
         }
 
         $parseStr .= '</tr>';
+        $parseStr .= '</thead>';
         $parseStr .= '<volist name="' . $datasource . '" id="' . $name . '" ><tr class="" id="row_{$' . $name . '.' . $pk . '}" '; //支持鼠标移动单元行颜色变化 具体方法在js中定义
         if (!empty($checkbox)) {
             //    $parseStr .= 'onmouseover="over(event)" onmouseout="out(event)" onclick="change(event)" ';

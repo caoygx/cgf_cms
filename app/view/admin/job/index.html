@@ -1,0 +1,175 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+                <form method='get' action="__SELF__" class="form-inline">
+                      <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="id" style="margin-right:5px;"> id</label>
+    
+       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="date" style="margin-right:5px;"> 日期</label>
+    
+       <input  class="form-control" name="date" type="text" id="date" size="30" value="{$vo[date] ? $vo[date] : $_GET[date]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="app" style="margin-right:5px;"> APP</label>
+    
+       <input  class="form-control" name="app" type="text" id="app" size="30" value="{$vo[app] ? $vo[app] : $_GET[app]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="business" style="margin-right:5px;"> 行业</label>
+    
+       <input  class="form-control" name="business" type="text" id="business" size="30" value="{$vo[business] ? $vo[business] : $_GET[business]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="field" style="margin-right:5px;"> 领域</label>
+    
+       <input  class="form-control" name="field" type="text" id="field" size="30" value="{$vo[field] ? $vo[field] : $_GET[field]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="active" style="margin-right:5px;"> 活跃人数(万)</label>
+    
+       <input  class="form-control" name="active" type="text" id="active" size="30" value="{$vo[active] ? $vo[active] : $_GET[active]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="active_day" style="margin-right:5px;"> 日均活跃人数(万)</label>
+    
+       <input  class="form-control" name="active_day" type="text" id="active_day" size="30" value="{$vo[active_day] ? $vo[active_day] : $_GET[active_day]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="active_chain_rate" style="margin-right:5px;"> 活跃人数环比</label>
+    
+       <input  class="form-control" name="active_chain_rate" type="text" id="active_chain_rate" size="30" value="{$vo[active_chain_rate] ? $vo[active_chain_rate] : $_GET[active_chain_rate]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_starts_day" style="margin-right:5px;"> 人均单日启动次数(次)</label>
+    
+       <input  class="form-control" name="avg_starts_day" type="text" id="avg_starts_day" size="30" value="{$vo[avg_starts_day] ? $vo[avg_starts_day] : $_GET[avg_starts_day]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_usage_duration_day" style="margin-right:5px;"> 人均单日使用时长(分钟)</label>
+    
+       <input  class="form-control" name="avg_usage_duration_day" type="text" id="avg_usage_duration_day" size="30" value="{$vo[avg_usage_duration_day] ? $vo[avg_usage_duration_day] : $_GET[avg_usage_duration_day]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_usage_days_month" style="margin-right:5px;"> 人均月度使用天数</label>
+    
+       <input  class="form-control" name="avg_usage_days_month" type="text" id="avg_usage_days_month" size="30" value="{$vo[avg_usage_days_month] ? $vo[avg_usage_days_month] : $_GET[avg_usage_days_month]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="active_day_chain_rate" style="margin-right:5px;"> 日均活跃人数环比</label>
+    
+       <input  class="form-control" name="active_day_chain_rate" type="text" id="active_day_chain_rate" size="30" value="{$vo[active_day_chain_rate] ? $vo[active_day_chain_rate] : $_GET[active_day_chain_rate]}" />
+       </div>
+   
+
+
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                </form>
+                <br/>
+                <php> $query = strstr($_SERVER["REQUEST_URI"],'?');</php>
+
+                <div class="row">
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/add" class="btn btn-block btn-info btn-sm ">添加</a>
+                    </div>
+                    <php>}</php>
+
+
+                    <php>if(0==1){</php>
+                    <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
+                                             class="btn btn-block btn-info btn-sm ">导出</a></div>
+                    <php>}</php>
+                </div>
+
+
+            </div>
+
+            <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <div class="card-body">
+                <html:list id="checkList" name="vo"
+                           style="table table-bordered table-hover dataTable dtr-inline"
+                           checkbox="true" action="true" datasource="list" show="id:id::sort,date:日期::sort,app:APP::sort,business:行业::sort,field:领域::sort,active:活跃人数(万)::sort,active_day:日均活跃人数(万)::sort,active_chain_rate:活跃人数环比::sort,avg_starts_day:人均单日启动次数(次)::sort,avg_usage_duration_day:人均单日使用时长(分钟)::sort,avg_usage_days_month:人均月度使用天数::sort,active_day_chain_rate:日均活跃人数环比::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
+
+
+
+            </div>
+
+            <div class="card-body">
+            <div class="row">
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
+                <php>}</php>
+
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="foreverdel();" class="btn btn-danger"> 批量删除</a>
+                <php>}</php>
+            </div>
+            <div class="container text-center">
+                {$page}
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page"
+                                                        name="txt_page">页
+                    <input id="btn_jump" type="button" value="跳转"></div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="__PUBLIC__/common/Job.js"></script>
+
+<script>
+    <php>
+        $params = input('get.');
+        unset($params['p']);
+        $params = http_build_query($params);
+    </php>
+
+        $(function () {
+            console.log(URL);
+
+            $('#btn_jump').click(function () {
+                goPage();
+            });
+            function goPage() {
+                var params = '{$params}';
+                var url = CONTROLLER+"/index?"+params;
+                url += "&p="+$('#txt_page').val();
+                window.location.href = url;
+
+            }
+        });
+
+
+
+
+
+</script>

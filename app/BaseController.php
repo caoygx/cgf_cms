@@ -874,7 +874,7 @@ class {%className%} extends Common
         } else {
             $sort = $asc ? 'asc' : 'desc';
         }
-        $sort = 'desc';
+        //$sort = 'desc';
 
         //取得满足条件的记录数
 
@@ -882,18 +882,17 @@ class {%className%} extends Common
         if ($count > 0) {
             //import ( "ORG.Util.Page" );
             //创建分页对象
-            if (! empty ( $_REQUEST ['listRows'] )) {
-                $listRows = $_REQUEST ['listRows'];
+            if (! empty ( $_REQUEST ['_listRows'] )) {
+                $listRows = $_REQUEST ['_listRows'];
             } elseif(!empty($this->listRows)){
                 $listRows = $this->listRows;
             } else {
-                $listRows = '15';
+                $listRows = '100';
             }
 
             if(strtolower(MODULE_NAME) == 'user'){
                 unset($_GET['uid']);
             }
-
             //========================================== cgf  start =========================================
 
             //1.生成查询字段
@@ -916,7 +915,7 @@ class {%className%} extends Common
                     }
                 }
             }
-            $voList = $model->order($order.' '. $sort)->paginate(15, false, ['query' => []]);
+            $voList = $model->order($order.' '. $sort)->paginate($listRows, false, ['query' => []]);
 
             //去掉前台不显示的字段，与上面$selectFields功能重复
             /*if(C('ret_format') == 'json' || C('ret_format') == 'jsonp'){

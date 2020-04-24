@@ -1,1 +1,141 @@
-sb
+
+<div style="margin-left:20px; margin-top:20px; margin-bottom: 20px; ">
+        <form action="" class="form-inline">
+                <div class="row">
+                    <label class="" style="margin-right:30px;">聚合搜索</label>
+                    <!--<img src="//www.baidu.com/img/baidu_jgylogo3.gif" style="    width: 101px;  height: 33px; margin-right:10px;" />-->
+                    <input class="form-control" type="text" id="kw" name="kw" style="margin-right:1px; width: 550px;">
+                    <input class="form-control btn btn-info" type="submit" value="搜索" id="iso" style="width: 90px;" >
+                </div>
+        </form>
+
+</div>
+
+<!--
+<div v-for = "(item,index) in items"  :class = "active == index ? 'addclass' : '' " @click='dowm(index)'>
+-->
+
+
+<div id="so_result"></div>
+
+<div id="app">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" v-for="site in sites">
+            <a class="nav-link" :class=" {active:site.name==='baidu'} " id="aaa" data-toggle="tab" :href="'#'+site.name"
+               role="tab" aria-controls="home"
+               aria-selected="true">{{ site.zh }}</a>
+        </li>
+
+    </ul>
+</div>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="baidu" role="tabpanel" aria-labelledby="home-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_baidu" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="bing" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_bing" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="sogou" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_sogou" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="soso" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_soso" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="so" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_so" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="iqiyi" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_iqiyi" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- <div class="tab-pane fade" id="soku" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="f_result_soku" class="embed-responsive-item" src=""></iframe>
+        </div>
+    </div>-->
+</div>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+
+
+<script>
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+
+/*
+$('#iso').click(function(){
+    integrationSo();
+});
+*/
+
+function integrationSo(){
+    var kw = $('#kw').val();
+
+    var selectedSearchEngine = searchEngine;
+
+    item = selectedSearchEngine[0];
+    var url = item.url.replace("key",kw);
+    $('#f_result_'+item.name).attr("src",url);
+
+    setTimeout("loadSo",3000);
+
+
+}
+
+function loadSo(){
+    for(var key=1; key<selectedSearchEngine.count(); key++){
+        item = selectedSearchEngine[key];
+        var url = item.url.replace("key",kw);
+        $('#f_result_'+item.name).attr("src",url);
+    }
+}
+    var searchEngine = [
+                        {"name":"baidu","zh":"百度","url":"https://www.baidu.com/s?wd=key"},
+                        {"name":"bing","zh":"必应","url":"https://cn.bing.com/search?q=key"},
+                        {"name":"so","zh":"360搜索","url":"https://www.so.com/s?ie=utf-8&fr=none&src=360sou_newhome&nlpv=3.7.3zt&q=key"},
+                        {"name":"soso","zh":"搜搜","url":"https://www.sogou.com/tx?ie=utf8&pid=&query=key&w=&sut=609&sst0=1587612666616&lkt=2%2C1587612666009%2C1587612666151"},
+                        {"name":"sogou","zh":"搜狗","url":"https://www.sogou.com/web?query=key&_asf=www.sogou.com&_ast=&w=01019900&p=40040100&ie=utf8&from=index-nologin&s_from=index&sut=1106&sst0=1587612698441&lkt=2%2C1587612697336%2C1587612698127&sugsuv=003FC7C33D9842725CD1528233417894"},
+
+
+                        //{"name":"soku","zh":"优酷","url":"https://so.youku.com/search_video/q_key"},
+                        {"name":"iqiyi","zh":"爱奇异","url":"https://so.iqiyi.com/so/q_key?source=default"}
+                     ];
+
+
+
+    new Vue({
+      el: '#app',
+      data: {
+        sites: searchEngine
+      }
+    })
+
+
+$(function(){
+    $('#kw').focus();
+    var kw = getUrlParam("kw");
+    if(kw){
+        $('#kw').val(kw);
+        integrationSo();
+    }
+});
+
+
+</script>
