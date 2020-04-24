@@ -8,8 +8,8 @@ use app\model\OutletUser as User;
 use think\facade\Request;
 use think\Response;
 use think\facade\Db;
-use think\Facade\Route;
-use think\Facade\Config;
+use think\facade\Route;
+use think\facade\Config;
 
 class Auth
 {
@@ -32,7 +32,6 @@ class Auth
 
         }
         $request->module = $module;
-
 
         $controller = Request::controller();
         $action = Request::action();
