@@ -971,6 +971,7 @@ class {%className%} extends Common
 //var_dump($voList);exit;
 
 
+            //列表排序相关
             $sortImg = $sort == 'desc' ? "glyphicon-arrow-down" : "glyphicon-arrow-up"; //排序图标 glyphicon glyphicon-arrow-up
             if($sort=='desc'){
                 $sortImg = 'glyphicon-arrow-down';
@@ -982,6 +983,10 @@ class {%className%} extends Common
 
             $sortAlt = $sort == 'desc' ? '升序排列' : '倒序排列'; //排序提示
             $sort = $sort == 'desc' ? 'asc' : 'desc'; //页面上显示的下一次排序方式
+            $this->assign('sort',$sort);
+            $this->assign('sortAlt',$sortAlt);
+            $this->assign('sortImg',$sortImg);
+            $this->assign ( 'order', $order );
 
             //$this->pageVar = $voList;
             /*$voList = [];
@@ -990,7 +995,6 @@ class {%className%} extends Common
 
             // 获取分页显示
             $page = $voList->render();
-
             $this->assign('page',$page);
             $this->assign('list',$voList);
 

@@ -452,25 +452,33 @@ class Html extends TagLib
             $fields[] = explode(':', $val);
         }
         if (!empty($checkbox) && 'true' == strtolower($checkbox)) {
-//如果指定需要显示checkbox列
+            //如果指定需要显示checkbox列
             $parseStr .= '<th width="8"><input type="checkbox" id="check" onclick="CheckAll(\'' . $id . '\')"></th>';
         }
         if (!empty($key)) {
             $parseStr .= '<th width="12">No</th>';
         }
         foreach ($fields as $field) {
-//显示指定的字段
+            //显示指定的字段
             $property = explode('|', $field[0]);
             $showname = explode('|', $field[1]);
             if (isset($showname[1])) {
                 $parseStr .= '<th width="' . $showname[1] . '">';
             } else {
-                $parseStr .= '<th class="sorting">';
+                $parseStr .= '<th class="">';
             }
             $showname[2] = isset($showname[2]) ? $showname[2] : $showname[0];
             if('sort' == $field[3]){
-                //$parseStr .= '<a  href="javascript:sortBy(\'' . $property[0] . '\',\'{$sort}\',\'' . ACTION_NAME . '\')" title="按照' . $showname[2] . '{$sortType} ">' . $showname[0] . '<eq name="order" value="' . $property[0] . '" > <span class="glyphicon {$sortImg}" ></span> <else/> <span class="glyphicon glyphicon-sort" ></span> </eq></a></th>';
-                $parseStr .= $showname[0] . '</th>';
+                $parseStr .= '
+               
+                
+                <a  href="javascript:sortBy(\'' . $property[0] . '\',\'{$sort}\',\'' . '{$actionName}' . '\')" title="按照' . $showname[2] . '{$sortAlt} ">' . $showname[0] . '<eq name="order" value="' . $property[0] . '" >
+                  
+                <span class="glyphicon {$sortImg}" ></span> <else/> 
+                <span class="glyphicon glyphicon-sort" ></span> </eq>
+                
+                </a></th>';
+                //$parseStr .= $showname[0] . '</th>';
             } else {
                 $parseStr .= $showname[0] . '</th>';
             }
