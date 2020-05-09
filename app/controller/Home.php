@@ -9,7 +9,65 @@ class Home extends BaseController
 {
     public $autoInstantiateModel=false;
 
+
     public function index(){
+
+        /*$elements = [
+            'ap','ad','pro','ion','pro','al'
+        ];
+        $word = "adapprofessional";
+        $sp = new Separate($word);
+        $sp->dispose($elements);
+        var_dump($sp->elements);*/
+
+        /*$oldElementsCount = count($sp->elements);
+        foreach ($elements as $element) {
+            $sp->getPrefix($word,$element);
+            $sp->getSuffix($word,$element);
+        }
+        $newElementsCount = count($sp->elements);
+
+
+        if($newElementsCount>$oldElementsCount){
+            $oldElementsCount = count($sp->elements);
+            foreach ($elements as $element) {
+                $sp->getPrefix($word,$element);
+                $sp->getSuffix($word,$element);
+            }
+            $newElementsCount = count($sp->elements);
+        }
+
+
+        if($newElementsCount>$oldElementsCount){
+            $oldElementsCount = count($sp->elements);
+            foreach ($elements as $element) {
+                $sp->getPrefix($word,$element);
+                $sp->getSuffix($word,$element);
+            }
+            $newElementsCount = count($sp->elements);
+        }*/
+
+
+
+       /* $element = "ad";
+        $sp->getPrefix($word,$element);
+
+        $element = "gb";
+        $sp->getPrefix($word,$element);
+
+
+        $element = "ap";
+        $sp->getPrefix($word,$element);
+        $element = "al";
+        $sp->getSuffix($word,$element);
+
+        $element = "pro";
+        $sp->getPrefix($word,$element);
+        $element = "ion";
+        $sp->getSuffix($word,$element);*/
+
+
+        //exit;
         return $this->toview();
     }
 
@@ -62,5 +120,61 @@ class Home extends BaseController
     public function hello($name = 'ThinkPHP6')
     {
         return 'hello,' . $name;
+    }
+}
+
+class Separate{
+    public $elements = [];
+    public $left = 0;
+    public $right = 0;
+    public $word;
+
+
+
+    function __construct($word)
+    {
+        $this->word = $word;
+        $this->right = strlen($word);
+    }
+
+    function dispose($elements){
+        $oldElementsCount = count($this->elements);
+        foreach ($elements as $element) {
+            $this->getPrefix($this->word,$element);
+            $this->getSuffix($this->word,$element);
+        }
+        $newElementsCount = count($this->elements);
+
+        if($newElementsCount>$oldElementsCount){
+           $this->dispose($elements);
+        }
+    }
+
+    /**
+     * @param $word
+     * @param $element
+     */
+    function getPrefix($word,$prefix){
+
+        $len = strlen($prefix);
+        $start = $this->left;
+        //设前缀长度=2,取单词2个字符，判断是否与前缀相同，是则找到了前缀
+        if(substr($word,$start,$len) === $prefix){
+            $this->elements[] = ['start'=>$start,'length'=>$len];
+            $this->left = $start+$len;
+        }
+
+    }
+
+    function getSuffix($word,$suffix){
+
+        $lenSuffix = strlen($suffix);
+        $lenWord = strlen($word);
+        $start = $this->right -  $lenSuffix;
+        //设前缀长度=2,取单词2个字符，判断是否与前缀相同，是则找到了前缀
+        if(substr($word,$start,$lenSuffix) === $suffix){
+            $this->elements[] = ['start'=>$start,'length'=>$lenSuffix];
+            $this->right = $start;
+        }
     }
 }

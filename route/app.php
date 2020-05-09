@@ -34,6 +34,8 @@ Route::group('admin', function () {
     Route::rule('/gmv/index', 'gmv/index');
     Route::rule('/mobile/index', 'mobile/index');
     Route::rule('/edu/index', 'edu/index');
+    Route::rule('/edu/exportExcel', 'edu/exportExcel');
+
     Route::rule('/watch/index', 'watch/index');
     Route::rule('/tv/index', 'tv/index');
 

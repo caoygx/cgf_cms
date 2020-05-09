@@ -162,7 +162,7 @@ class Html extends TagLib
         if (!empty($options)) {
             $parseStr .= '<?php  foreach($' . $options . ' as $key=>$val) { ?>';
             if (!empty($selected)) {
-                $parseStr .= '<?php if(($' . $selected . ' !== "") && ($' . $selected . ' == $key || in_array($key,$' . $selected . '))) { ?>';
+                $parseStr .= '<?php if(($' . $selected . ' !== "") && ($' . $selected . ' == $key || (is_array($'.$selected.') && in_array($key,$' . $selected . ')))) { ?>';
                 $parseStr .= '<option selected="selected" value="<?php echo $key ?>"><?php echo $val ?></option>';
                 $parseStr .= '<?php }else { ?><option value="<?php echo $key ?>"><?php echo $val ?></option>';
                 $parseStr .= '<?php } ?>';

@@ -17,6 +17,7 @@ use think\Validate;
 use liliuwei\think\Jump;
 
 
+
 /**
  * 控制器基础类
  */
@@ -254,7 +255,9 @@ class {%className%} extends Common
     {
 
         //自动获取添加模板
-        $tpl = $this->generateAddTpl(true);
+        $tpl = $this->cgf->generateAddTemplatel(true);
+
+        $this->generateOptions();
 
         $id          = input($this->m->getPk());
         $where       = [];
@@ -264,13 +267,22 @@ class {%className%} extends Common
         if (method_exists($this, '_replacePublic')) {
             $this->_replacePublic($vo);
         }
-        $this->vo = $vo;
+        //var_dump($vo);exit;
+        $this->assign('vo',$vo);
         $this->assign('action', 'edit');
 
         $this->pageTitle = $this->getControllerTitle(CONTROLLER_NAME) . "编辑";
         $this->cgf       = "cgf";
 
-        $this->toview("", "add");
+        return $this->toview("", "add");
+    }
+
+    function generateOptions(){
+        $options = $this->cgf->definition->getAllColumnOptions();
+        foreach ($options as $column => $option) {
+            $this->assign('opt_' . $column, $option);
+            $this->assign($column . '_selected', input($column));
+        }
     }
 
 
@@ -947,8 +959,8 @@ class {%className%} extends Common
 
             if (method_exists ( $this, '_join' )) $this->_join ( $voList );
 
-            //将导出功能注入到此处
-            if(ACTION_NAME == 'exportExcel'){
+            //将导出excel功能注入到此处
+            if($this->request->action() == 'exportExcel'){
                 $this->realExportExcel($voList);
             }
 
@@ -965,10 +977,6 @@ class {%className%} extends Common
                     //$p->parameter[$key] =  urlencode ( $val );
                 }
             }*/
-
-
-
-//var_dump($voList);exit;
 
 
             //列表排序相关
@@ -1170,10 +1178,9 @@ class {%className%} extends Common
 
             return view('', $data);
         }else{
-            $viewDir = $this->app->getAppPath()."view/".$this->request->module."/";
+            $viewDir = $this->app->getRootPath()."view/".$this->request->module."/";
             View::config(['view_path' => $viewDir]);
-            //var_dump();
-            return view('', $data);
+            return view($tpl, $data);
         }
     }
 
@@ -1242,7 +1249,28 @@ class {%className%} extends Common
         $_REQUEST[$key] = $_POST[$key] = $_GET[$key] = $value;
     }
 
+    function exportExcel()
+    {
+        return $this->index();
+    }
 
+    function realExportExcel($list)
+    {
+        header('Content-type: text/html; charset=utf-8');
 
+        $xlsCell = $this->cgf->getNameAndZh();
+        $xlsName = $this->cgf->definition->getTableDefinition()['title'];
+        foreach ($list as $k => $v) {
+            //$xlsData[$k]['status'] = 1 ? '正常':'锁定';
+            //$xlsData[$k]['addtime'] = date("Y-m-d H:i:s", $v['addtime']);
+        }
+        exportExcel($xlsName, $xlsCell, $list);
+    }
+
+    function _before_export()
+    {
+        C('URL_MODEL', 0); //解决时间搜索中 空格被转成+号，导致下一页内容无法显示
+        if (empty($_REQUEST['listRows'])) $_REQUEST['listRows'] = 50;
+    }
 
 }
