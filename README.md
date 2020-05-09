@@ -3,13 +3,20 @@
 
 > 运行环境要求PHP7.1+。
 
+### demo地址
+
 
 ## 安装
 
-~~~
+```
 cd cgf_cms
 composer indstall
-~~~
+```
+
+或者直接解压vendor.zip
+
+
+
 
 
 ## 配置
