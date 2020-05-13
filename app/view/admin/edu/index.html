@@ -4,11 +4,11 @@
         <div class="card">
             <div class="card-header">
 
-                <form method='get' action="" class="form-inline">
+                <form method='get' action="__SELF__" class="form-inline">
                       <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="id" style="margin-right:5px;"> id</label>
+    <label for="date" style="margin-right:5px;"> 日期</label>
     
-       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
+       <input  class="form-control" name="date" type="text" id="date" size="30" value="{$vo[date] ? $vo[date] : $_GET[date]}" />
        </div>
    
 
@@ -34,30 +34,44 @@
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="active" style="margin-right:5px;"> 活跃人数（万）</label>
+    <label for="active" style="margin-right:5px;"> 活跃人数(万)</label>
     
        <input  class="form-control" name="active" type="text" id="active" size="30" value="{$vo[active] ? $vo[active] : $_GET[active]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="active_chain_rate" style="margin-right:5px;"> 活跃人数环比</label>
-    
-       <input  class="form-control" name="active_chain_rate" type="text" id="active_chain_rate" size="30" value="{$vo[active_chain_rate] ? $vo[active_chain_rate] : $_GET[active_chain_rate]}" />
-       </div>
-   
-
-  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="active_day" style="margin-right:5px;"> 日均活跃人数（万）</label>
+    <label for="active_day" style="margin-right:5px;"> 日均活跃人数(万)</label>
     
        <input  class="form-control" name="active_day" type="text" id="active_day" size="30" value="{$vo[active_day] ? $vo[active_day] : $_GET[active_day]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="active_day_chain_rate" style="margin-right:5px;"> 日均活跃人数环比</label>
+    <label for="avg_starts" style="margin-right:5px;"> 人均启动次数(次)</label>
     
-       <input  class="form-control" name="active_day_chain_rate" type="text" id="active_day_chain_rate" size="30" value="{$vo[active_day_chain_rate] ? $vo[active_day_chain_rate] : $_GET[active_day_chain_rate]}" />
+       <input  class="form-control" name="avg_starts" type="text" id="avg_starts" size="30" value="{$vo[avg_starts] ? $vo[avg_starts] : $_GET[avg_starts]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_usage_duration" style="margin-right:5px;"> 人均使用时长(小时)</label>
+    
+       <input  class="form-control" name="avg_usage_duration" type="text" id="avg_usage_duration" size="30" value="{$vo[avg_usage_duration] ? $vo[avg_usage_duration] : $_GET[avg_usage_duration]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_starts_day" style="margin-right:5px;"> 人均单日启动次数(次)</label>
+    
+       <input  class="form-control" name="avg_starts_day" type="text" id="avg_starts_day" size="30" value="{$vo[avg_starts_day] ? $vo[avg_starts_day] : $_GET[avg_starts_day]}" />
+       </div>
+   
+
+  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
+    <label for="avg_usage_duration_day" style="margin-right:5px;"> 人均单日使用时长(分钟)</label>
+    
+       <input  class="form-control" name="avg_usage_duration_day" type="text" id="avg_usage_duration_day" size="30" value="{$vo[avg_usage_duration_day] ? $vo[avg_usage_duration_day] : $_GET[avg_usage_duration_day]}" />
        </div>
    
 
@@ -69,23 +83,16 @@
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="avg_starts_day" style="margin-right:5px;"> 人均单日启动次数（次）</label>
+    <label for="active_chain_rate" style="margin-right:5px;"> 活跃人数环比</label>
     
-       <input  class="form-control" name="avg_starts_day" type="text" id="avg_starts_day" size="30" value="{$vo[avg_starts_day] ? $vo[avg_starts_day] : $_GET[avg_starts_day]}" />
+       <input  class="form-control" name="active_chain_rate" type="text" id="active_chain_rate" size="30" value="{$vo[active_chain_rate] ? $vo[active_chain_rate] : $_GET[active_chain_rate]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="avg_usage_duration_day" style="margin-right:5px;"> 人均单日使用时长（分钟）</label>
+    <label for="active_day_chain_rate" style="margin-right:5px;"> 日均活跃人数环比</label>
     
-       <input  class="form-control" name="avg_usage_duration_day" type="text" id="avg_usage_duration_day" size="30" value="{$vo[avg_usage_duration_day] ? $vo[avg_usage_duration_day] : $_GET[avg_usage_duration_day]}" />
-       </div>
-   
-
-  <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="avg_usage_duration_once" style="margin-right:5px;"> 人均单次使用时长（分钟）</label>
-    
-       <input  class="form-control" name="avg_usage_duration_once" type="text" id="avg_usage_duration_once" size="30" value="{$vo[avg_usage_duration_once] ? $vo[avg_usage_duration_once] : $_GET[avg_usage_duration_once]}" />
+       <input  class="form-control" name="active_day_chain_rate" type="text" id="active_day_chain_rate" size="30" value="{$vo[active_day_chain_rate] ? $vo[active_day_chain_rate] : $_GET[active_day_chain_rate]}" />
        </div>
    
 
@@ -102,7 +109,7 @@
                     <php>}</php>
 
 
-                    <php>if(0==1){</php>
+                    <php>if(1==1){</php>
                     <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
                                              class="btn btn-block btn-info btn-sm ">导出</a></div>
                     <php>}</php>
@@ -115,7 +122,7 @@
             <div class="card-body">
                 <html:list id="checkList" name="vo"
                            style="table table-bordered table-hover dataTable dtr-inline"
-                           checkbox="true" action="true" datasource="list" show="id:id::sort,app:APP::sort,business:行业::sort,field:领域::sort,active:活跃人数（万）::sort,active_chain_rate:活跃人数环比::sort,active_day:日均活跃人数（万）::sort,active_day_chain_rate:日均活跃人数环比::sort,avg_usage_days_month:人均月度使用天数::sort,avg_starts_day:人均单日启动次数（次）::sort,avg_usage_duration_day:人均单日使用时长（分钟）::sort,avg_usage_duration_once:人均单次使用时长（分钟）::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
+                           checkbox="true" action="true" datasource="list" show="id:编号::sort,date:日期::sort,app:APP::sort,business:行业::sort,field:领域::sort,active:活跃人数(万)::sort,active_day:日均活跃人数(万)::sort,avg_starts:人均启动次数(次)::sort,avg_usage_duration:人均使用时长(小时)::sort,avg_starts_day:人均单日启动次数(次)::sort,avg_usage_duration_day:人均单日使用时长(分钟)::sort,avg_usage_days_month:人均月度使用天数::sort,active_chain_rate:活跃人数环比::sort,active_day_chain_rate:日均活跃人数环比::sort" actionlist="edit:查看:id"/>
 
 
 
@@ -144,7 +151,7 @@
     </div>
 </div>
 
-<script src="__PUBLIC__/common/Game.js"></script>
+<script src="__PUBLIC__/common/Edu.js"></script>
 
 <script>
     <php>

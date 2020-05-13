@@ -4,46 +4,46 @@
         <div class="card">
             <div class="card-header">
 
-                <form method='get' action="__SELF__" class="form-inline">
+                <form method='get' action="" class="form-inline">
                       <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="status" style="margin-right:5px;"> 状态</label>
+    <label for="id" style="margin-right:5px;"> id</label>
     
-       <html:select  first="请选择" options='opt_status' selected='status_selected' name="status" />
+       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="sort" style="margin-right:5px;"> 商品排序</label>
+    <label for="name" style="margin-right:5px;"> name</label>
     
-       <input  class="form-control" name="sort" type="text" id="sort" size="10" value="{$vo[sort] ? $vo[sort] : $_GET[sort]}" />
+       <input  class="form-control" name="name" type="text" id="name" size="30" value="{$vo[name] ? $vo[name] : $_GET[name]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="user_id" style="margin-right:5px;"> 用户id</label>
+    <label for="pwd" style="margin-right:5px;"> pwd</label>
     
-       <input  class="form-control" name="user_id" type="text" id="user_id" size="10" value="{$vo[user_id] ? $vo[user_id] : $_GET[user_id]}" />
+       <input  class="form-control" name="pwd" type="text" id="pwd" size="30" value="{$vo[pwd] ? $vo[pwd] : $_GET[pwd]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="weight" style="margin-right:5px;"> 重量</label>
+    <label for="status" style="margin-right:5px;"> status</label>
     
-       <input  class="form-control" name="weight" type="text" id="weight" size="10" value="{$vo[weight] ? $vo[weight] : $_GET[weight]}" />
+       <input  class="form-control" name="status" type="text" id="status" size="10" value="{$vo[status] ? $vo[status] : $_GET[status]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="type" style="margin-right:5px;"> 类型</label>
+    <label for="auth" style="margin-right:5px;"> auth</label>
     
-       <html:select  first="请选择" options='opt_type' selected='type_selected' name="type" />
+       <input  class="form-control" name="auth" type="text" id="auth" size="10" value="{$vo[auth] ? $vo[auth] : $_GET[auth]}" />
        </div>
    
 
   <div class="form-group"  style="margin-right:15px; margin-bottom: 5px;">
-    <label for="category_id" style="margin-right:5px;"> 商品分类</label>
+    <label for="photo" style="margin-right:5px;"> photo</label>
     
-       <input  class="form-control" name="category_id" type="text" id="category_id" size="10" value="{$vo[category_id] ? $vo[category_id] : $_GET[category_id]}" />
+       <input  class="form-control" name="photo" type="text" id="photo" size="30" value="{$vo[photo] ? $vo[photo] : $_GET[photo]}" />
        </div>
    
 
@@ -60,7 +60,7 @@
                     <php>}</php>
 
 
-                    <php>if(1==1){</php>
+                    <php>if(0==1){</php>
                     <div class="col-lg-1"><a href="__CONTROLLER__/exportExcel<?=$query?>"
                                              class="btn btn-block btn-info btn-sm ">导出</a></div>
                     <php>}</php>
@@ -73,7 +73,7 @@
             <div class="card-body">
                 <html:list id="checkList" name="vo"
                            style="table table-bordered table-hover dataTable dtr-inline"
-                           checkbox="true" action="true" datasource="list" show="thumb:缩略图::sort,status_text:状态,sort:商品排序::sort,user_id:用户id::sort,weight:重量::sort,type_text:类型,category_id:商品分类::sort,modify_t:修改时间::sort" actionlist="edit:编辑:id,goods_del:删除:id"/>
+                           checkbox="true" action="true" datasource="list" show="id:id::sort,name:name::sort,pwd:pwd::sort,status:status::sort,auth:auth::sort,photo:photo::sort" actionlist="edit:编辑:id,foreverdel:永久删除:id"/>
 
 
 
@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<script src="__PUBLIC__/common/Goods.js"></script>
+<script src="__PUBLIC__/common/Admin.js"></script>
 
 <script>
     <php>

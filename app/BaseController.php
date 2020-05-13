@@ -1178,7 +1178,7 @@ class {%className%} extends Common
 
             return view('', $data);
         }else{
-            $viewDir = $this->app->getRootPath()."view/".$this->request->module."/";
+            $viewDir = $this->app->getAppPath()."view/".$this->request->module."/";
             View::config(['view_path' => $viewDir]);
             return view($tpl, $data);
         }
