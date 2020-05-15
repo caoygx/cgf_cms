@@ -262,7 +262,7 @@ class {%className%} extends Common
         $id          = input($this->m->getPk());
         $where       = [];
         $where['id'] = $id;
-        if (MODULE_NAME == 'User') $where['user_id'] = $this->user_id;
+        if ($this->request->module == 'User') $where['user_id'] = $this->user_id;
         $vo = $this->m->where($where)->find();
         if (method_exists($this, '_replacePublic')) {
             $this->_replacePublic($vo);
