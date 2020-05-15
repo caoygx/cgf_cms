@@ -902,7 +902,7 @@ class {%className%} extends Common
                 $listRows = '100';
             }
 
-            if(strtolower(MODULE_NAME) == 'user'){
+            if(strtolower($this->request->module) == 'user'){
                 unset($_GET['uid']);
             }
             //========================================== cgf  start =========================================
