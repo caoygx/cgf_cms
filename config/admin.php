@@ -12,7 +12,7 @@ return [
             'url'      => '',
             'children' => [
                 ["title" => '商品管理', "controller" => 'goods',"action"=>"index"],
-                ["title" => '订单管理', "controller" => 'order',"action"=>"index"],
+                //["title" => '订单管理', "controller" => 'order',"action"=>"index"],
                 //["title" => '快递', "controller" => 'express',"action"=>"index"],
 
                 /*["title" => 'APP', "controller"=>"app","action"=>"index"],
