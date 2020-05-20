@@ -11,14 +11,18 @@ return [
             'title'    => "数据",
             'url'      => '',
             'children' => [
-                ["title" => 'APP', "controller"=>"app","action"=>"index"],
+                ["title" => '商品管理', "controller" => 'goods',"action"=>"index"],
+                ["title" => '订单管理', "controller" => 'order',"action"=>"index"],
+                ["title" => '快递', "controller" => 'express',"action"=>"index"],
+
+                /*["title" => 'APP', "controller"=>"app","action"=>"index"],
                 ["title" => '游戏', "controller"=>"game","action"=>"index"],
                 ["title" => 'GMV', "controller"=>"gmv","action"=>"index"],
                 ["title" => '手机存量', "controller"=>"mobile","action"=>"index"],
                 ["title" => '在线教育', "controller"=>"edu","action"=>"index"],
                 ["title" => '智能手表', "controller"=>"watch","action"=>"index"],
                 ["title" => '招聘',"controller"=>"job","action"=>"index"],
-                ["title" => '平板电视',"controller"=>"tv","action"=>"index"],
+                ["title" => '平板电视',"controller"=>"tv","action"=>"index"],*/
 
             ]
         ],

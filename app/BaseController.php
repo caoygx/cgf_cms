@@ -202,7 +202,7 @@ class {%className%} extends Common
 
             //$this->m = Db::name($this->controllerName);
 
-            error_reporting(E_ALL ^ E_NOTICE);
+            error_reporting(E_ALL ^ E_NOTICE ^E_DEPRECATED ^E_STRICT^E_WARNING);
             $appBasePath = __DIR__;
             $dbconfig    = include('../config/database.php');
             $dbconfig    = $dbconfig['connections']['mysql'];

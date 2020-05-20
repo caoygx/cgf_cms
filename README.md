@@ -29,4 +29,7 @@ http://www.cgfcms.com/admin 域名修改成自己的域名
 
 ## 注意
 开启了强制路由，每新增一个功能，都要手动增加路由，否则无法访问。
-1.访问新功能的地址会报错，因为文件还没生成，刷新下就好。
+1. 访问新功能的地址会报错，因为文件还没生成，刷新下就好。
+2. BaseController.php屏蔽了一些错误输出，如果要显示可以去掉下面的代码： 
+ error_reporting(E_ALL ^ E_NOTICE ^E_DEPRECATED ^E_STRICT^E_WARNING); 
+ 
