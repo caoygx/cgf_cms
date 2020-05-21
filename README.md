@@ -4,6 +4,8 @@
 > 运行环境要求PHP7.1+。
 
 ### demo地址
+1. 后台管理 http://cgfcms.rrbrr.com/admin/goods/index
+2. 前台接口 http://cgfcms.rrbrr.com/goods/index?ret_format=json
 
 
 ## 安装

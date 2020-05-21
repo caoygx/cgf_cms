@@ -7,6 +7,7 @@ use think\facade\Env;
 
 Route::group('', function () {
     Route::rule('/', 'home/index');
+    Route::rule('/goods/index', 'goods/index');
 })->middleware([\app\middleware\Auth::class],'home');
 
 Route::group('u', function () {
