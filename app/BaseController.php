@@ -6,6 +6,7 @@ namespace app;
 
 use Cgf\Cgf;
 use think\App;
+use think\exception\InvalidArgumentException;
 use think\facade\View;
 use think\facade\Db;
 use think\facade\Request;
@@ -244,7 +245,7 @@ class {%className%} extends Common
         }
 
         $default_return_format = config('app.default_return_format','html');
-        if($default_return_format == 'html' || $this->request->module=='admin'){
+        if(in_array($this->request->module,["admin","uer"])  &&  $default_return_format == 'html'){ //only backend need generate template
             $r = $this->cgf->generateListsTemplate();//生成模板
         }
         return $this->toview();
@@ -426,7 +427,10 @@ class {%className%} extends Common
 
     public function show(){
         $id = input('id');
-        $vo = $this->m->find($id);
+        if(empty($id)){
+            return "参数id不能为空";
+        }
+        $vo = $this->m->find($id)->toArray();
         if(empty($vo)) return $this->error('数据不存在');
         if (method_exists ( $this, '_show' )) {
             $this->_show ( $vo );
@@ -886,7 +890,7 @@ class {%className%} extends Common
         } else {
             $sort = $asc ? 'asc' : 'desc';
         }
-        //$sort = 'desc';
+        $sort = 'asc';
 
         //取得满足条件的记录数
 
@@ -899,10 +903,10 @@ class {%className%} extends Common
             } elseif(!empty($this->listRows)){
                 $listRows = $this->listRows;
             } else {
-                $listRows = '100';
+                $listRows = '20';
             }
 
-            if(strtolower($this->request->module) == 'user'){
+            if($this->request->module == 'user'){
                 unset($_GET['uid']);
             }
             //========================================== cgf  start =========================================
@@ -1167,9 +1171,18 @@ class {%className%} extends Common
         $jsonData['msg'] = $msg;
         $returnFormat = 'json';
         $default_return_format = config('app.default_return_format','html');
+        $isAjax = $this->request->isAjax();
+        if($isAjax || input('ret_format') == "json"){
+            $default_return_format = 'json';
+        }
         //$default_return_format = $this->request->$default_return_format;
         if($default_return_format=='json'){
-            $jsonData['data'] = $data;
+            if(!empty($data['list'])){
+                $jsonData['data'] = $data['list'];
+            }else{
+                $jsonData['data'] = $data;
+            }
+
             return json($jsonData);
         }elseif($default_return_format=='jsonp'){
             $jsonData['data'] = $data;
