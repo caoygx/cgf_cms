@@ -3,9 +3,18 @@
 
 > 运行环境要求PHP7.1+。
 
+### 基本情况 
+这是基于cgf的tp6的版本，还在开发中，问题不少。相比较之前tp3做的更完善些。
+tp3版本的地址：https://github.com/caoygx/cgf_demo
+
 ### demo地址
 1. 后台管理 http://cgfcms.rrbrr.com/admin/goods/index
 2. 前台接口 http://cgfcms.rrbrr.com/goods/index?ret_format=json
+
+### cgf详情说明
+https://github.com/caoygx/cgf_demo
+
+
 
 
 ## 安装
